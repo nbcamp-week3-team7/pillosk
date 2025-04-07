@@ -1,0 +1,15 @@
+disabled_rules:
+  - force_cast
+  - force_unwrapping
+
+opt_in_rules:
+  - empty_enum_arguments
+  - explicit_init
+
+rules:
+  indentation:
+    spaces: 4
+
+  type_name:
+    min_length: 3
+    max_length: 40
