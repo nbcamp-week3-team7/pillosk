@@ -44,7 +44,7 @@ class CategoryView: UIView {
     
     
     let categoryViewTitleLabel = UILabel()
-    let categoryStackView = 
+//    let categoryStackView = 
     let categoryScrollView = UIScrollView()
     
     
@@ -55,7 +55,7 @@ class CategoryView: UIView {
         categoryViewTitleLabel.text = "pillosk"
         categoryViewTitleLabel.font = .boldSystemFont(ofSize: 30)
         
-        categoryScrollView
+//        categoryScrollView
         
         
         [categoryViewTitleLabel, categoryScrollView]
