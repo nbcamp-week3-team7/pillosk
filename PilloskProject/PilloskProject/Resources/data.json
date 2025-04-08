@@ -1,157 +1,147 @@
 {
   "categories": [
     {
-      "name": "감기/피로",
+      "name": "Cold-Fatigue",
       "products": [
         {
           "name": "써콜드플러스",
           "price": 5800,
-          "image": "기침약.jpg"
+          "image": "CoughMedicine.jpg"
         },
         {
           "name": "스피드펜 이지",
           "price": 4200,
-          "image": "해열제.jpg"
+          "image": "Antipyretic.jpg"
         },
         {
           "name": "노즈원큐 나잘스프레이",
           "price": 6700,
-          "image": "코막힘스프레이.jpg"
+          "image": "NasalSpray.jpg"
         },
         {
           "name": "이지엔6 이브",
           "price": 6900,
-          "image": "진통제.jpg"
+          "image": "Painkiller.jpg"
         },
         {
           "name": "비타그란 비타민C",
           "price": 3900,
-          "image": "비타민C.jpg"
+          "image": "VitaminC.jpg"
         }
       ]
     },
     {
-      "name": "두통/통증",
+      "name": "Headache-Pain",
       "products": [
         {
           "name": "콜드엔 통증감기",
           "price": 4500,
-          "image": "아세트아미노펜.jpg"
+          "image": "Acetaminophen.jpg"
         },
         {
           "name": "이브닝 프림로즈 오일",
           "price": 8700,
-          "image": "근육통크림.jpeg"
+          "image": "MusclePainCream.jpeg"
         },
         {
           "name": "보스웰리아 7Days",
           "price": 9800,
-          "image": "근육통2.jpg"
+          "image": "MusclePain2.jpg"
         },
         {
           "name": "이지엔6 나이트",
           "price": 5200,
-          "image": "생리통2.jpeg"
-        },
-        {
-          "name": "이지엔6 이브",
-          "price": 6900,
-          "image": "진통제.jpg"
+          "image": "MenstrualPain2.jpeg"
         },
         {
           "name": "임팩타민 프리미엄",
           "price": 7900,
-          "image": "근육통.jpg"
+          "image": "MusclePain.jpg"
         },
         {
           "name": "매직자석 패치 3000",
           "price": 4900,
-          "image": "근육통패치.jpg"
-        },
-        {
-          "name": "TEUFELSSALBE HEISS 크림",
-          "price": 8500,
-          "image": "근육통크림.jpeg"
+          "image": "MusclePainPatch.jpg"
         },
         {
           "name": "이부프로펜",
           "price": 3900,
-          "image": "이부프로펜.jpg"
+          "image": "Ibuprofen.jpg"
         },
         {
           "name": "스피드펜 생리통약",
           "price": 4400,
-          "image": "생리통.jpg"
+          "image": "MenstrualPain.jpg"
         }
       ]
     },
     {
-      "name": "소화/위장",
+      "name": "Digestion-Stomach",
       "products": [
-        {
-          "name": "로페리드",
-          "price": 4300,
-          "image": "지사제.jpg"
-        },
-        {
-          "name": "베나치오 이지액",
-          "price": 5200,
-          "image": "변비약.jpg"
-        },
-        {
-          "name": "포롬팜 프로바이오틱스",
-          "price": 8500,
-          "image": "프로바이오틱스.jpg"
-        },
         {
           "name": "속이쿨 정",
           "price": 4600,
-          "image": "제산제.jpg"
+          "image": "Antacid.jpg"
+        },
+        {
+          "name": "로페리드",
+          "price": 4300,
+          "image": "Antidiarrheal.jpg"
         },
         {
           "name": "베나치오 액",
           "price": 5000,
-          "image": "소화제.jpg"
+          "image": "DigestiveMedicine.jpg"
+        },
+        {
+          "name": "베나치오 이지액",
+          "price": 5200,
+          "image": "Laxative.jpg"
+        },
+        {
+          "name": "포롬팜 프로바이오틱스",
+          "price": 8500,
+          "image": "Probiotics.jpg"
         }
       ]
     },
     {
-      "name": "알레르기",
+      "name": "Allergy",
       "products": [
         {
-          "name": "알레나온",
-          "price": 5300,
-          "image": "항히스타민.jpg"
+          "name": "코메키나",
+          "price": 5900,
+          "image": "Allergy.jpg"
         },
         {
           "name": "MEDI 멀티 나잘스프레이",
           "price": 6700,
-          "image": "알레르기스프레이.jpg"
-        },
-        {
-          "name": "Classic Soothing Balm",
-          "price": 4800,
-          "image": "가려움완화.jpg"
-        },
-        {
-          "name": "코메키나",
-          "price": 5900,
-          "image": "알레르기.jpg"
-        },
-        {
-          "name": "리페어 인공눈물",
-          "price": 6100,
-          "image": "인공눈물.jpeg"
+          "image": "AllergySpray.jpg"
         },
         {
           "name": "파이톤 퀘르소디 500",
           "price": 6200,
-          "image": "비염스프레이.jpg"
+          "image": "RhinitisSpray.jpg"
+        },
+        {
+          "name": "리페어 인공눈물",
+          "price": 6100,
+          "image": "ArtificialTears.jpeg"
+        },
+        {
+          "name": "알레나온",
+          "price": 5300,
+          "image": "Antihistamine.jpg"
+        },
+        {
+          "name": "Classic Soothing Balm",
+          "price": 4800,
+          "image": "ItchRelief.jpg"
         },
         {
           "name": "나조메가 나잘스프레이",
           "price": 6900,
-          "image": "가려움.jpg"
+          "image": "Itching.jpg"
         }
       ]
     }
