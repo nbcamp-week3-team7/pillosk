@@ -22,3 +22,9 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1)
     }
 }
+
+extension ViewController: CategoryViewDelegate {
+    func setCategoryButtons(categories: [String]) {
+        categoryView.notifyCategoryButtonsUpdate(categories: categories)
+    }
+}
