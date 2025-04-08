@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         orderSummaryVC.didMove(toParent: self)
         
         orderSummaryVC.view.snp.makeConstraints { make in
-            make.height.equalTo(400)
+            make.height.equalTo(300)
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
         }
