@@ -26,7 +26,7 @@ final class ViewController: UIViewController {
     private var numberOfPages: Int {
         return Int(ceil(Double(products.count) / Double(itemsPerPage)))
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -53,17 +53,17 @@ final class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(10)
         }
     }
-
+    
     func loadData() {
         dataService.loadData { [weak self] result in
             guard let self = self else { return }
-
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let productData):
                     self.productData = [productData]
                     
-                    // 임시로 첫번째 카테고리 상품을 사용
+                    // 임시로 첫 번째 카테고리 상품을 사용
                     if let firstCategory = productData.categories.first {
                         self.products = firstCategory.products
                         
@@ -82,11 +82,11 @@ final class ViewController: UIViewController {
             }
         }
     }
-
+    
     func configureUI() {
-
+        
         categoryView.backgroundColor = .brown
-
+        
         view.addSubview(categoryView)
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
