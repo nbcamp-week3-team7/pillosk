@@ -74,10 +74,3 @@ extension ViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-extension ViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
-        menuListView.pageControl.currentPage = page
-    }
-}
