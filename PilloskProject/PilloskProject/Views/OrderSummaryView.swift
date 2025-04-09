@@ -10,9 +10,9 @@ import SnapKit
 
 /// 주문 요약 화면 클래스
 /// 테이블뷰, 버튼, 레이블 등 UI 요소를 포함하며 오토레이아웃을 설정
-class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
-    weak var delegate: OrderSummaryViewDelegate?
-    private var orderItems: [Product] = []
+class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate, StackTableViewCellDelegate {
+    
+    private var orderItems: [MenuItem] = []
     
     let orderTableView = UITableView()
     let summaryCountLabel = UILabel()
@@ -59,15 +59,29 @@ class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
         orderTableView.snp.makeConstraints { make in
             make.top.equalTo(lineView.snp.bottom).offset(0)
             make.trailing.leading.equalToSuperview().inset(5)
-            make.bottom.equalTo(paymentButton)
+            make.bottom.equalTo(paymentButton.snp.top)
         }
     }
     
+    func updatePaymentButtonTitle() {
+        /// 같은 이름의 MenuItem은 셀 추가 대신 개수 추가하기
+        let totalPrice = calculateTotalPrice()
+        paymentButton.setTitle("\(totalPrice.formattedWithComma())원 결제하기", for: .normal)
+    }
+    
     func addOrderItem(product: Product) {
-        orderItems.append(product)
+        if let existingIndex = orderItems.firstIndex(where: { $0.name == product.name }) {
+            orderItems[existingIndex].quantity += 1
+        } else {
+            let menuItem = MenuItem(name: product.name, price: product.price, quantity: 1)
+            orderItems.append(menuItem)
+        }
+        
+        /// 테이블뷰 갱신 및 UI 업데이트
         orderTableView.reloadData()
         updateSummaryCountLabel(count: orderItems.count)
         updateButtons(isEnabled: !orderItems.isEmpty)
+        updatePaymentButtonTitle()
     }
     
     /// 테이블뷰의 섹션별 셀 개수 반환
@@ -75,18 +89,57 @@ class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
         return orderItems.count // 수정 필요: 메뉴 클릭 수에 따라 변경
     }
     
+    /// 테이블뷰 셀 높이 설정
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     /// 테이블뷰 셀 생성 및 데이터 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
         
-        let product = orderItems[indexPath.row]
-        cell.configure(name: product.name, price: product.price, quantity: 1)
+        let menuItem = orderItems[indexPath.row]
+        cell.configure(name: menuItem.name,
+                       price: menuItem.price,
+                       quantity: menuItem.quantity)
+        cell.delegate = self
         return cell
     }
     
-    /// 테이블뷰 셀 높이 설정
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+    /// 테이블뷰 삭제 요청(
+    func didTapDeleteButton(cell: StackTableViewCell) {
+        guard let indexPath = orderTableView.indexPath(for: cell) else { return }
+        
+        orderItems.remove(at: indexPath.row)
+        orderTableView.deleteRows(at: [indexPath], with: .automatic)
+        updateSummaryCountLabel(count: orderItems.count)
+        updateButtons(isEnabled: !orderItems.isEmpty)
+        updatePaymentButtonTitle()
+    }
+    
+    ///
+    func didUpdateQuantity(cell: StackTableViewCell, quantity: Int) {
+        guard let indexPath = orderTableView.indexPath(for: cell) else { return }
+        
+        if indexPath.row < orderItems.count {
+            if quantity <= 0 {
+                print("1개 이하 구매 불가")
+                return
+            }
+            
+            orderItems[indexPath.row].quantity = quantity
+            updatePaymentButtonTitle()
+            updateSummaryCountLabel(count: orderItems.count)
+        } else {
+            print("IndexPath.row가 배열 범위 초과")
+        }
+    }
+    
+    private func calculateTotalPrice() -> Int {
+        if orderItems.isEmpty {
+            return 0
+        }
+        return orderItems.reduce(0) { $0 + ($1.price * $1.quantity) }
     }
     
     /// 요약 레이블 초기 설정
@@ -109,10 +162,11 @@ class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func updateButtons(isEnabled: Bool) {
         let buttonColor: UIColor = isEnabled ? .systemBlue : .lightGray
+        let buttonTextColor: UIColor = isEnabled ? .white : .white
         resetButton.isEnabled = isEnabled
         paymentButton.isEnabled = isEnabled
-        resetButton.backgroundColor = buttonColor
         paymentButton.backgroundColor = buttonColor
+        paymentButton.setTitleColor(buttonTextColor, for: .normal)
     }
     
     /// 초기화 버튼 설정
@@ -125,26 +179,67 @@ class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
         resetButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         
         resetButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(60)
             make.width.equalTo(150)
             make.leading.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview()
         }
+        
+        resetButton.addTarget(self,
+                              action: #selector(resetButtonTapped),
+                              for: .touchUpInside)
     }
     
     /// 결제 버튼 설정
     /// 텍스트, 폰트, 배경색 및 코너 라운드 적용
     func processPayment() {
-        paymentButton.setTitle("n원 결제하기", for: .normal) // 수정 필요: 데이터 처리
+        paymentButton.setTitle("0원 결제하기", for: .normal) // 수정 필요: 데이터 처리
         paymentButton.setTitleColor(.white, for: .normal)
-        paymentButton.backgroundColor = .systemBlue
+        paymentButton.backgroundColor = .lightGray
         paymentButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         
         paymentButton.snp.makeConstraints { make in
             make.height.equalTo(50)
             make.leading.equalTo(resetButton.snp.trailing)
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview()
+        }
+        paymentButton.addTarget(self,
+                                action: #selector(paymentButtonTapped),
+                                for: .touchUpInside)
+    }
+    
+    @objc private func resetButtonTapped() {
+        showAlert(title: "확인", message: "전체 목록을 삭제하시겠습니까?", isReset: true)
+    }
+    
+    @objc private func paymentButtonTapped() {
+        showAlert(title: "확인", message: "결제를 진행하시겠습니까?", isReset: false)
+    }
+    
+    /// 알럿 표시 함수
+    private func showAlert(title: String, message: String, isReset: Bool) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default){ _ in
+            self.orderItems.removeAll()
+            self.orderTableView.reloadData()
+            self.updateSummaryCountLabel(count: 0)
+            self.updateButtons(isEnabled: false)
+            self.updatePaymentButtonTitle()
+            if !isReset {
+                print("결제 진행 중")
+                ///추가 결제 로직 기능 작성 가능
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        
+        /// 현재 뷰 컨트롤러에서 알럿 표시
+        if let viewController = self.parentViewController {
+            viewController.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -173,9 +268,20 @@ extension UIView {
     }
 }
 
+extension Int {
+    func formattedWithComma() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = ","
+        return numberFormatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
+}
+
 /// 테이블뷰 셀 커스텀 클래스
 /// 스택뷰 및 다양한 UI 요소를 포함
 class StackTableViewCell: UITableViewCell {
+    weak var delegate: StackTableViewCellDelegate?
+    
     let countContainerView = UIView()
     let verticalStackView = UIStackView()
     let horizontalStackView = UIStackView()
@@ -186,6 +292,8 @@ class StackTableViewCell: UITableViewCell {
     let plusButton = UIButton()
     let countLabel = UILabel()
     let deleteButton = UIButton()
+
+    private var unitPrice: Int = 0
     
     /// 이름 레이블 설정
     private func nameLabelSettings() {
@@ -280,15 +388,22 @@ class StackTableViewCell: UITableViewCell {
         }
         
         horizontalStackView.snp.makeConstraints { make in
-            make.top.bottom.trailing.equalToSuperview().inset(5)
+            make.top.bottom.equalToSuperview().inset(5)
             make.leading.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().offset(-10)
         }
     }
     
     func configure(name: String, price: Int, quantity: Int) {
-        nameLabel.text = "\(name) x \(quantity)"
-        priceLabel.text = "₩\(price * quantity)"
+        nameLabel.text = name
+        unitPrice = price //개별 가격 저장
+        updatePriceLabel(quantity: quantity) // 초기 가격 설정
+        countLabel.text = "\(quantity)"
+    }
+    
+    private func updatePriceLabel(quantity: Int) {
+        let totalPrice = unitPrice * quantity
+        priceLabel.text = "\(totalPrice.formattedWithComma())원"
     }
     
     /// 셀 초기화 메서드
@@ -310,9 +425,77 @@ class StackTableViewCell: UITableViewCell {
         contentView.addSubview(horizontalStackView)
         
         setLayoutStackView()
+        
+        ///x버튼 설정
+        
+        ///버튼에 액션 추가
+        deleteButton.addTarget(self,
+                               action: #selector(deleteButtonTapped),
+                               for: .touchUpInside)
+        minusButton.addTarget(self,
+                              action: #selector(minusButtonTapped),
+                              for: .touchUpInside)
+        plusButton.addTarget(self,
+                             action: #selector(plusButtonTapped),
+                             for: .touchUpInside)
+    }
+    
+    @objc private func deleteButtonTapped() {
+        delegate?.didTapDeleteButton(cell: self)
+    }
+    
+    @objc private func minusButtonTapped() {
+        guard let currentCount = Int(countLabel.text ?? "0"), currentCount > 1 else {
+            print("1개 이하 구매 불가")
+            return
+        }
+        let updatedCount = currentCount - 1
+        countLabel.text = "\(updatedCount)"
+        updatePriceLabel(quantity: updatedCount)
+        delegate?.didUpdateQuantity(cell: self, quantity: updatedCount)
+    }
+    
+    @objc private func plusButtonTapped() {
+        guard let currentCount = Int(countLabel.text ?? "0") else { return }
+        
+        let updateCount = currentCount + 1
+        countLabel.text = "\(updateCount)"
+        updatePriceLabel(quantity: updateCount)
+        delegate?.didUpdateQuantity(cell: self, quantity: updateCount)
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    ///countLabel 값 업데이트 함수
+    func updateCountLabel(increment: Bool) {
+        guard let currentCount = Int(countLabel.text ?? "0") else { return }
+        
+        let updatedCount = increment ? currentCount + 1 : currentCount - 1
+        
+        if updatedCount < 0 {
+            print("0 이하 조작 불가")
+            return
+        } else if updatedCount > 100 {
+            print("100 이상 조작 불가")
+            return
+        }
+        countLabel.text = "\(updatedCount)"
+    }
+}
+
+extension UIView {
+    // 부모 뷰 컨트롤러를 가져오는 확장 메서드
+    var parentViewController: UIViewController? {
+        var responder: UIResponder? = self
+        while let r = responder {
+            if let viewController = r as? UIViewController {
+                return viewController
+            }
+            responder = r.next
+        }
+        return nil
     }
 }

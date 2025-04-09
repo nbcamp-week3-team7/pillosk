@@ -33,7 +33,7 @@ protocol ProductCellDelegate: AnyObject {
     func didTapAddButton(product: Product)
 }
 
-protocol OrderSummaryViewDelegate: AnyObject {
-    func didAddProduct(_ product: Product)
+protocol StackTableViewCellDelegate: AnyObject {
+    func didTapDeleteButton(cell: StackTableViewCell)
+    func didUpdateQuantity(cell: StackTableViewCell, quantity: Int)
 }
-
