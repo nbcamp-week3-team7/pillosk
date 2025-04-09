@@ -11,7 +11,9 @@ import SnapKit
 /// 상품 정보를 표시하는 컬렉션 뷰 셀
 /// - 이미지, 이름, 가격, 플러스(+) 버튼 포함
 final class ProductCell: UICollectionViewCell {
+    /// BY: 델리게이트 연결
     weak var delegate: ProductCellDelegate?
+    
     /// 상품 이미지 뷰
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -66,9 +68,10 @@ final class ProductCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside) //BY: Delegate Button Action
     }
     
+    /// BY: 버튼 누르면 델리게이트 동작
     @objc private func addButtonTapped() {
             if let product = product {
                 delegate?.didTapAddButton(product: product)
