@@ -79,6 +79,11 @@ final class MenuListView: UIView {
         addSubview(collectionView)
         addSubview(pageControl)
         
+        collectionView.layer.cornerRadius = 12
+        collectionView.layer.borderWidth = 1
+        collectionView.layer.borderColor = UIColor.lightGray.cgColor
+        collectionView.clipsToBounds = true
+        
         collectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.8)
