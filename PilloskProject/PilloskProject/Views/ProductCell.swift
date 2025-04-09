@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProductCell: UICollectionViewCell {    
     private let imageView: UIImageView = {

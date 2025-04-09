@@ -40,7 +40,7 @@ final class ViewController: UIViewController {
     
     private func setupCollectionView() {
         menuListView.collectionView.dataSource = self
-        menuListView.collectionView.delegate = self
+//        menuListView.collectionView.delegate = self
         menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
     }
     
@@ -72,14 +72,6 @@ extension ViewController: UICollectionViewDataSource {
         let product = products[indexPath.item]
         cell.configure(with: product)
         return cell
-    }
-}
-
-extension ViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 2
-        let height = collectionView.frame.height / 2
-        return CGSize(width: width, height: height)
     }
 }
 
