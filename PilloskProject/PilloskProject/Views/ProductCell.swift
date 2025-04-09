@@ -8,11 +8,19 @@
 import UIKit
 import SnapKit
 
-final class ProductCell: UICollectionViewCell {    
+final class ProductCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private let productInfoStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 4
+        sv.alignment = .leading
+        return sv
     }()
     
     private let nameLabel: UILabel = {
@@ -25,6 +33,16 @@ final class ProductCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         return label
+    }()
+    
+    private let horizontalStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .horizontal
+        sv.spacing = 8
+        sv.alignment = .center
+        sv.isLayoutMarginsRelativeArrangement = true
+        sv.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        return sv
     }()
     
     private let addButton: UIButton = {
@@ -46,34 +64,32 @@ final class ProductCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        imageView.image = UIImage(named: "CoughMedicine.jpg")
-        nameLabel.text = "써콜드플러스"
-        priceLabel.text = "\(5800)"
-        
         contentView.addSubview(imageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(priceLabel)
-        contentView.addSubview(addButton)
+        contentView.addSubview(horizontalStackView)
+        [productInfoStackView, addButton].forEach {
+            horizontalStackView.addArrangedSubview($0)
+        }
+        [nameLabel, priceLabel].forEach {
+            productInfoStackView.addArrangedSubview($0)
+        }
+        
+        contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.clipsToBounds = true
         
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(8)
             $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(150)
         }
         
-        nameLabel.snp.makeConstraints {
+        horizontalStackView.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview().inset(4)
-        }
-        
-        priceLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(4)
-            $0.leading.trailing.equalToSuperview().inset(4)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
         addButton.snp.makeConstraints {
-            $0.top.equalTo(priceLabel.snp.bottom).offset(8)
-            $0.centerX.equalToSuperview()
             $0.width.height.equalTo(30)
         }
     }

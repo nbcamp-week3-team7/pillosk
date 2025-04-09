@@ -34,7 +34,7 @@ final class ViewController: UIViewController {
         menuListView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(300)
+            $0.height.equalTo(600)
         }
     }
     

@@ -32,13 +32,14 @@ final class MenuListView: UIView {
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(0.5)
             )
-            
             let horizontalGroup: NSCollectionLayoutGroup
             horizontalGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: horizontalGroupSize,
                 repeatingSubitem: item,
                 count: 2
             )
+            
+            horizontalGroup.interItemSpacing = .fixed(8)
             
             let verticalGroupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
@@ -48,6 +49,8 @@ final class MenuListView: UIView {
                 layoutSize: verticalGroupSize,
                 subitems: [horizontalGroup, horizontalGroup]
             )
+            
+            verticalGroup.interItemSpacing = .fixed(8)
             
             let section = NSCollectionLayoutSection(group: verticalGroup)
             section.orthogonalScrollingBehavior = .paging
@@ -79,11 +82,6 @@ final class MenuListView: UIView {
         addSubview(collectionView)
         addSubview(pageControl)
         
-        collectionView.layer.cornerRadius = 12
-        collectionView.layer.borderWidth = 1
-        collectionView.layer.borderColor = UIColor.lightGray.cgColor
-        collectionView.clipsToBounds = true
-        
         collectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.8)
@@ -92,7 +90,6 @@ final class MenuListView: UIView {
         pageControl.snp.makeConstraints {
             $0.top.equalTo(collectionView.snp.bottom).offset(8)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview()
         }
     }
 }
