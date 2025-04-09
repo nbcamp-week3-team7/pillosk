@@ -28,3 +28,12 @@ extension ViewController: CategoryViewDelegate {
         categoryView.notifyCategoryButtonsUpdate(categories: categories)
     }
 }
+
+protocol ProductCellDelegate: AnyObject {
+    func didTapAddButton(product: Product)
+}
+
+protocol OrderSummaryViewDelegate: AnyObject {
+    func didAddProduct(_ product: Product)
+}
+

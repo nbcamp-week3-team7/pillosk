@@ -20,3 +20,10 @@ struct Product: Codable {
     let price: Int
     let image: String
 }
+
+struct MenuItem {
+    let name: String
+    let price: Int
+    var quantity: Int
+}
+

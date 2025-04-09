@@ -11,12 +11,14 @@ import SnapKit
 /// 주문 요약 화면 클래스
 /// 테이블뷰, 버튼, 레이블 등 UI 요소를 포함하며 오토레이아웃을 설정
 class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
-    weak var delegate: CategoryViewDelegate?
+    weak var delegate: OrderSummaryViewDelegate?
+    private var orderItems: [Product] = []
     
     let orderTableView = UITableView()
     let summaryCountLabel = UILabel()
     let resetButton = UIButton()
     let paymentButton = UIButton()
+    let lineView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,39 +28,59 @@ class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     /// UI 초기 설정 및 레이아웃 배치 함수 호출
     private func setupUI() {
-        orderTableView.backgroundColor = .brown
-        [orderTableView, summaryCountLabel, resetButton, paymentButton].forEach { self.addSubview($0) }
+        [orderTableView, summaryCountLabel, resetButton, paymentButton, lineView].forEach { self.addSubview($0) }
         
+        setLineView()
         setTableView()
         summaryCountLabelSetting()
         resetOrderButton()
         processPayment()
     }
     
+    func setLineView() {
+        lineView.backgroundColor = .lightGray
+        self.addSubview(lineView)
+        
+        lineView.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(summaryCountLabel.snp.bottom)
+        }
+    }
+    
     /// 테이블뷰 초기 설정
     /// 데이터소스, 델리게이트 설정 및 레이아웃 배치
     func setTableView() {
-        orderTableView.register(StackTableViewCell.self, forCellReuseIdentifier: "StackCell")
+        orderTableView.register(StackTableViewCell.self, forCellReuseIdentifier: "stackCell")
+        
+        orderTableView.dataSource = self
+        orderTableView.delegate = self
         
         orderTableView.snp.makeConstraints { make in
-            make.top.equalTo(summaryCountLabel.snp.bottom).offset(2)
+            make.top.equalTo(lineView.snp.bottom).offset(0)
             make.trailing.leading.equalToSuperview().inset(5)
             make.bottom.equalTo(paymentButton)
         }
     }
     
+    func addOrderItem(product: Product) {
+        orderItems.append(product)
+        orderTableView.reloadData()
+        updateSummaryCountLabel(count: orderItems.count)
+        updateButtons(isEnabled: !orderItems.isEmpty)
+    }
+    
     /// 테이블뷰의 섹션별 셀 개수 반환
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 // 수정 필요: 메뉴 클릭 수에 따라 변경
+        return orderItems.count // 수정 필요: 메뉴 클릭 수에 따라 변경
     }
     
     /// 테이블뷰 셀 생성 및 데이터 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
         
-        // 데이터 연결 (예: "Row X" 대신 실제 데이터)
-            cell.nameLabel.text = "Row \(indexPath.row) - NameLabel" // 수정 필요
-            cell.priceLabel.text = "Row \(indexPath.row) - PriceLabel" // 수정 필요
+        let product = orderItems[indexPath.row]
+        cell.configure(name: product.name, price: product.price, quantity: 1)
         return cell
     }
     
@@ -71,7 +93,7 @@ class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
     /// 텍스트, 폰트, 배경색 및 레이아웃 배치
     func summaryCountLabelSetting() {
         summaryCountLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        summaryCountLabel.text = ("총 n개") // 수정 필요: 데이터 처리
+        updateSummaryCountLabel(count: orderItems.count)
         summaryCountLabel.textAlignment = .left
         
         summaryCountLabel.snp.makeConstraints { make in
@@ -244,12 +266,6 @@ class StackTableViewCell: UITableViewCell {
             make.width.equalTo(30)
         }
         
-        countLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalTo(minusButton.snp.trailing)
-            make.width.equalTo(30)
-        }
-        
         plusButton.snp.makeConstraints { make in
             make.trailing.top.bottom.equalToSuperview()
             make.width.equalTo(30)
@@ -268,6 +284,11 @@ class StackTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().offset(-10)
         }
+    }
+    
+    func configure(name: String, price: Int, quantity: Int) {
+        nameLabel.text = "\(name) x \(quantity)"
+        priceLabel.text = "₩\(price * quantity)"
     }
     
     /// 셀 초기화 메서드

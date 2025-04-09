@@ -39,14 +39,15 @@ class OrderSummaryViewController: UIViewController, UITableViewDataSource, UITab
         showAlert(title: "확인", message: "정말 모든 항목을 삭제하시겠습니까?") {
             self.orderItems.removeAll()
             self.updateUI()
+            print("취소버튼 클릭")
         }
     }
     
     @objc private func handlePayment() {
         showAlert(title: "확인", message: "결제를 진행하시겠습니까?") {
-            print("결제 진행!")
             self.orderItems.removeAll()
             self.updateUI()
+            print("결제버튼 클릭")
         }
     }
     

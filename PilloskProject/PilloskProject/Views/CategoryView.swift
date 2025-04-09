@@ -28,7 +28,7 @@ class CategoryView: UIView {
             configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
             configuration.baseBackgroundColor = .systemBlue
             configuration.baseForegroundColor = .white
-            configuration.background.strokeColor = .cyan
+            //configuration.background.strokeColor = .cyan
             configuration.cornerStyle = .capsule
             configuration.buttonSize = .medium
             configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -85,8 +85,8 @@ class CategoryView: UIView {
 
         categoryScrollView.showsHorizontalScrollIndicator = false
 
-        categoryScrollView.backgroundColor = .red
-        categoryContentsStackView.backgroundColor = .blue
+//        categoryScrollView.backgroundColor = .red
+//        categoryContentsStackView.backgroundColor = .blue
 
         categoryContentsStackView.axis = .horizontal
         categoryContentsStackView.spacing = 10
