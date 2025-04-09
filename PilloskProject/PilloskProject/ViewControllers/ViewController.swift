@@ -47,12 +47,12 @@ final class ViewController: UIViewController {
     private func loadDummyData() {
         /// 임시데이터, 추후 수정
         products = [
-            Product(name: "비타민C 1000mg", price: 3900, image: "vitamin_c"),
-            Product(name: "종합감기약", price: 7500, image: "cold_medicine"),
-            Product(name: "에너지 드링크", price: 2500, image: "energy_drink"),
-            Product(name: "피로 회복제", price: 4800, image: "recovery_tonic"),
-            Product(name: "소화제", price: 3300, image: "digestive_aid"),
-            Product(name: "유산균", price: 8500, image: "probiotics")
+            Product(name: "비타민C 1000mg", price: 3900, image: "CoughMedicine.jpg"),
+            Product(name: "종합감기약", price: 7500, image: "Antipyretic.jpg"),
+            Product(name: "에너지 드링크", price: 2500, image: "NasalSpray.jpg"),
+            Product(name: "피로 회복제", price: 4800, image: "Painkiller.jpg"),
+            Product(name: "소화제", price: 3300, image: "VitaminC.jpg"),
+            Product(name: "유산균", price: 8500, image: "Acetaminophen.jpg")
         ]
         
         menuListView.pageControl.numberOfPages = numberOfPages
