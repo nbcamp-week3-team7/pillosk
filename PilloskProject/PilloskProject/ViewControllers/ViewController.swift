@@ -9,8 +9,11 @@ import UIKit
 import SnapKit
 
 final class ViewController: UIViewController {
+    let orderSummaryVC = OrderSummaryView()
     
     let categoryView = CategoryView()
+    private let dataService = DataService()
+    private var productData: [ProductData] = []
     
     /// 상품 리스트 뷰 (UICollectionView + PageControl 포함)
     private let menuListView = MenuListView()
@@ -23,14 +26,61 @@ final class ViewController: UIViewController {
     private var numberOfPages: Int {
         return Int(ceil(Double(products.count) / Double(itemsPerPage)))
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        view.addSubview(categoryView)
+        categoryView.delegate = self
+        loadData()
+        configureUI()
         
         setupViews()
         setupCollectionView()
         loadDummyData()
+
+        addOrderSummaryViewController()
+    }
+    
+    func addOrderSummaryViewController() {
+        addChild(orderSummaryVC)
+        view.addSubview(orderSummaryVC.view)
+        orderSummaryVC.view.frame = view.bounds
+        orderSummaryVC.didMove(toParent: self)
+        
+        orderSummaryVC.view.snp.makeConstraints { make in
+            make.height.equalTo(300)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+    }
+
+    func loadData() {
+        dataService.loadData { [weak self] result in
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let productData):
+                    self.productData = [productData]
+                    let categoryNames = productData.categories.map { $0.name }
+                    self.categoryView.notifyCategoryButtonsUpdate(categories: categoryNames)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+
+    func configureUI() {
+
+        categoryView.backgroundColor = .brown
+
+        view.addSubview(categoryView)
+        categoryView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(120)
+        }
     }
     
     /// 메인 뷰에 menuListView 추가 및 레이아웃 설정

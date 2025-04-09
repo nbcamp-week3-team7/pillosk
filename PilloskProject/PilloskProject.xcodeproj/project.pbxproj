@@ -157,7 +157,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# ARM 맥일 경우 PATH 보정\nif [[ \"$(uname -m)\" == \"arm64\" ]]; then\n  export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\ncd \"${SRCROOT}\"\n\nif which swiftlint > /dev/null; then\n  echo \"✅ SwiftLint found, running...\"\n  swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\"\nelse\n  echo \"⚠️ warning: SwiftLint not installed\"\nfi\n";
+			shellScript = "# ARM 맥일 경우 PATH 보정\nif [[ \"$(uname -m)\" == \"arm64\" ]]; then\n  export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\ncd \"${SRCROOT}\"\n\nif which swiftlint > /dev/null; then\nswiftlint --fix && swiftlint\n  echo \"✅ SwiftLint found, running...\"\n  swiftlint lint --config \"${SRCROOT}/.swiftlint.yml\"\nelse\n  echo \"⚠️ warning: SwiftLint not installed\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
