@@ -26,7 +26,7 @@ final class ViewController: UIViewController {
     private var numberOfPages: Int {
         return Int(ceil(Double(products.count) / Double(itemsPerPage)))
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -38,7 +38,7 @@ final class ViewController: UIViewController {
         setupViews()
         setupCollectionView()
         loadDummyData()
-
+        
         addOrderSummaryViewController()
     }
     
@@ -54,15 +54,27 @@ final class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(10)
         }
     }
-
+    
     func loadData() {
         dataService.loadData { [weak self] result in
             guard let self = self else { return }
-
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let productData):
                     self.productData = [productData]
+                    
+                    // 임시로 첫 번째 카테고리 상품을 사용
+                    if let firstCategory = productData.categories.first {
+                        self.products = firstCategory.products
+                        
+                        // 페이지 컨트롤 업데이트
+                        self.menuListView.pageControl.numberOfPages = Int(ceil(Double(self.products.count) / Double(self.itemsPerPage)))
+                        
+                        // 컬렉션 뷰 리로드
+                        self.menuListView.collectionView.reloadData()
+                    }                    
+                    
                     let categoryNames = productData.categories.map { $0.name }
                     self.categoryView.notifyCategoryButtonsUpdate(categories: categoryNames)
                 case .failure(let error):
@@ -71,11 +83,11 @@ final class ViewController: UIViewController {
             }
         }
     }
-
+    
     func configureUI() {
-
+        
         categoryView.backgroundColor = .brown
-
+        
         view.addSubview(categoryView)
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
