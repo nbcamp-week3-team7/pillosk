@@ -115,8 +115,9 @@ final class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource {
     /// 컬렉션 뷰에 표시할 아이템(셀)의 총 개수 반환
-    /// - Parameter collectionView: 현재 컬렉션 뷰
-    /// - Parameter section: 섹션 번호 (현재는 1개)
+    /// - Parameters:
+    ///   - collectionView: 현재 컬렉션 뷰
+    ///   - section: 섹션 번호 (현재는 1개)
     /// - Returns: 상품 데이터의 총 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count

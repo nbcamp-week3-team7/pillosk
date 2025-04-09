@@ -8,11 +8,14 @@
 import UIKit
 import SnapKit
 
+/// 상품 목록을 그리드 형태로 보여주는 View
+/// - UICollectionView: 상품 셀을 표시
+/// - UIPageControl: 페이지 인디케이터
 final class MenuListView: UIView {
     /// 상품 리스트를 표시할 컬렉션 뷰
     let collectionView: UICollectionView
     
-    /// 페이지 컨트롤
+    /// 현재 페이지를 나타내는 페이지 컨트롤
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPage = 0
@@ -72,6 +75,7 @@ final class MenuListView: UIView {
             return section
         }
         
+        // 컬렉션 뷰 초기화
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isPagingEnabled = false
         collectionView.showsHorizontalScrollIndicator = false
