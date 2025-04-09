@@ -37,8 +37,7 @@ final class ViewController: UIViewController {
         
         setupViews()
         setupCollectionView()
-        loadDummyData()
-
+        
         addOrderSummaryViewController()
     }
     
@@ -63,6 +62,18 @@ final class ViewController: UIViewController {
                 switch result {
                 case .success(let productData):
                     self.productData = [productData]
+                    
+                    // 임시로 첫번째 카테고리 상품을 사용
+                    if let firstCategory = productData.categories.first {
+                        self.products = firstCategory.products
+                        
+                        // 페이지 컨트롤 업데이트
+                        self.menuListView.pageControl.numberOfPages = Int(ceil(Double(self.products.count) / Double(self.itemsPerPage)))
+                        
+                        // 컬렉션 뷰 리로드
+                        self.menuListView.collectionView.reloadData()
+                    }
+                    
                     let categoryNames = productData.categories.map { $0.name }
                     self.categoryView.notifyCategoryButtonsUpdate(categories: categoryNames)
                 case .failure(let error):
@@ -100,24 +111,6 @@ final class ViewController: UIViewController {
         // ProductCell 셀 등록 (재사용을 위한 identifier 설정)
         menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
     }
-    
-    /// 상품 목록 더미 데이터 로드
-    private func loadDummyData() {
-        // 임시데이터, 추후 수정
-        products = [
-            Product(name: "비타민C 1000mg", price: 3900, image: "CoughMedicine.jpg"),
-            Product(name: "종합감기약", price: 7500, image: "Antipyretic.jpg"),
-            Product(name: "에너지 드링크", price: 2500, image: "NasalSpray.jpg"),
-            Product(name: "피로 회복제", price: 4800, image: "Painkiller.jpg"),
-            Product(name: "소화제", price: 3300, image: "VitaminC.jpg"),
-            Product(name: "유산균", price: 8500, image: "Acetaminophen.jpg")
-        ]
-        
-        // 페이지 컨트롤의 전체 페이지 수 업데이트
-        menuListView.pageControl.numberOfPages = numberOfPages
-        // 컬렉션 뷰 데이터 리로드 (화면 갱신)
-        menuListView.collectionView.reloadData()
-    }
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -144,7 +137,15 @@ extension ViewController: UICollectionViewDataSource {
         let product = products[indexPath.item]
         // 셀 구성 (상품명, 가격, 이미지)
         cell.configure(with: product)
+        cell.delegate = self
         
         return cell
+    }
+}
+
+extension ViewController: ProductCellDelegate {
+    func didTapAddButton(product: Product) {
+        print("선택된 상품: \(product.name), 가격: \(product.price)")
+        // 이곳에 장바구니 추가 구현 가능합니다
     }
 }

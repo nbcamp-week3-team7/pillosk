@@ -8,9 +8,16 @@
 import UIKit
 import SnapKit
 
+/// 셀의 플러스 버튼 액션을 전달하는 델리게이트 프로토콜
+protocol ProductCellDelegate: AnyObject {
+    func didTapAddButton(product: Product)
+}
+
 /// 상품 정보를 표시하는 컬렉션 뷰 셀
 /// - 이미지, 이름, 가격, 플러스(+) 버튼 포함
 final class ProductCell: UICollectionViewCell {
+    weak var delegate: ProductCellDelegate?
+    
     /// 상품 이미지 뷰
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -106,6 +113,9 @@ final class ProductCell: UICollectionViewCell {
         addButton.snp.makeConstraints {
             $0.width.height.equalTo(30)
         }
+        
+        // 플러스 버튼 연결
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     /// 셀에 상품 데이터를 주입하는 메서드
@@ -116,5 +126,11 @@ final class ProductCell: UICollectionViewCell {
         nameLabel.text = product.name
         priceLabel.text = "\(product.price)원"
         imageView.image = UIImage(named: product.image)
+    }
+    
+    /// 플러스 버튼 클릭 시 호출
+    @objc private func addButtonTapped() {
+        guard let product = product else { return }
+        delegate?.didTapAddButton(product: product)
     }
 }
