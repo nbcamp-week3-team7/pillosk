@@ -1,7 +1,7 @@
 {
   "categories": [
     {
-      "name": "Cold-Fatigue",
+      "name": "감기/피로",
       "products": [
         {
           "name": "써콜드플러스",
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "name": "Headache-Pain",
+      "name": "두통/통증",
       "products": [
         {
           "name": "콜드엔 통증감기",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "name": "Digestion-Stomach",
+      "name": "소화/위장",
       "products": [
         {
           "name": "속이쿨 정",
@@ -106,7 +106,7 @@
       ]
     },
     {
-      "name": "Allergy",
+      "name": "알레르기",
       "products": [
         {
           "name": "코메키나",
