@@ -35,8 +35,6 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(categoryView)
-        categoryView.delegate = self
         loadData()
         configureUI()
         setupViews()
@@ -82,6 +80,7 @@ final class ViewController: UIViewController {
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(120)
+
         }
         
         view.addSubview(orderSummaryView)
@@ -110,7 +109,20 @@ final class ViewController: UIViewController {
         // ProductCell 셀 등록 (재사용을 위한 identifier 설정)
         menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
     }
-    
+
+    func addOrderSummaryViewController() {
+        addChild(orderSummaryVC)
+        view.addSubview(orderSummaryVC.view)
+        orderSummaryVC.view.frame = view.bounds
+        orderSummaryVC.didMove(toParent: self)
+
+        orderSummaryVC.view.snp.makeConstraints { make in
+            make.height.equalTo(300)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+    }
+
     /// 상품 목록 더미 데이터 로드
     private func loadDummyData() {
         // 임시데이터, 추후 수정

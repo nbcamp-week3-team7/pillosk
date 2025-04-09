@@ -24,7 +24,7 @@ extension UIColor {
 }
 
 extension ViewController: CategoryViewDelegate {
-    func setCategoryButtons(categories: [String]) {
+    func setCategoryButtons(categories: [Stinrg]) {
         categoryView.notifyCategoryButtonsUpdate(categories: categories)
     }
 }
