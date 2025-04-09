@@ -28,24 +28,23 @@ final class MenuListView: UIView {
         let layout = UICollectionViewCompositionalLayout { [weak pageControl = pageControl] sectionIndex, environment in
             // 아이템 (셀) 사이즈 지정
             let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.45), // 그룹 너비의 45% 차지
-                heightDimension: .fractionalHeight(1.0) // 그룹 높이의 100% 차지
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .fractionalHeight(1.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             // 수평 그룹: 셀 2개를 가로로 배치
             let horizontalGroupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0), // 컬렉션 뷰 width 에 맞춤
-                heightDimension: .fractionalHeight(0.5) // 섹션 높이의 50% 차지
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(0.5)
             )
             let horizontalGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: horizontalGroupSize,
                 subitems: [item, item]
             )
-            
             horizontalGroup.interItemSpacing = .fixed(16)
             
-            horizontalGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+            horizontalGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
             
             // 수직 그룹: 수평 그룹 2개를 세로로 배치
             let verticalGroupSize = NSCollectionLayoutSize(
@@ -55,8 +54,7 @@ final class MenuListView: UIView {
             let verticalGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: verticalGroupSize,
                 subitems: [horizontalGroup, horizontalGroup]
-            )
-            
+            )            
             verticalGroup.interItemSpacing = .fixed(16)
             
             // 섹션 생성
