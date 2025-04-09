@@ -158,7 +158,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
         summaryCountLabel.font = UIFont.boldSystemFont(ofSize: 16)
         updateSummaryCountLabel()
         summaryCountLabel.textAlignment = .left
-        
+
         summaryCountLabel.snp.makeConstraints { make in
             make.height.equalTo(40)
             make.top.equalToSuperview()
@@ -303,7 +303,7 @@ class StackTableViewCell: UITableViewCell {
     let countContainerView = UIView()
     let verticalStackView = UIStackView()
     let horizontalStackView = UIStackView()
-    
+
     let nameLabel = UILabel()
     let priceLabel = UILabel()
     let minusButton = UIButton()
@@ -318,13 +318,13 @@ class StackTableViewCell: UITableViewCell {
         nameLabel.font = UIFont.boldSystemFont(ofSize: 15)
         nameLabel.textColor = .black
     }
-    
+
     /// 가격 레이블 설정
     private func priceLabelSettings() {
         priceLabel.font = UIFont.systemFont(ofSize: 15)
         priceLabel.textColor = .black
     }
-    
+
     /// 마이너스 버튼 설정
     private func minusButtonSettings() {
         minusButton.setTitle("-", for: .normal)
@@ -332,7 +332,7 @@ class StackTableViewCell: UITableViewCell {
         minusButton.setTitleColor(.white, for: .normal)
         minusButton.backgroundColor = .clear
     }
-    
+
     /// 플러스 버튼 설정
     private func plusButtonSettings() {
         plusButton.setTitle("+", for: .normal)
@@ -340,7 +340,7 @@ class StackTableViewCell: UITableViewCell {
         plusButton.setTitleColor(.white, for: .normal)
         plusButton.backgroundColor = .clear
     }
-    
+
     /// 카운트 레이블 설정
     private func countLabelSettings() {
         countLabel.text = "1"
@@ -349,16 +349,16 @@ class StackTableViewCell: UITableViewCell {
         countLabel.backgroundColor = .clear
         countLabel.textColor = .white
     }
-    
+
     /// 카운트 컨테이너 설정
     private func countContainerViewSettings() {
         countContainerView.backgroundColor = .systemBlue
         countContainerView.layer.cornerRadius = 15
         countContainerView.clipsToBounds = true
-        
+
         [minusButton, countLabel, plusButton].forEach { countContainerView.addSubview($0) }
     }
-    
+
     /// 삭제 버튼 설정
     private func deleteButtonSettings() {
         deleteButton.setTitle("X", for: .normal)
@@ -366,27 +366,27 @@ class StackTableViewCell: UITableViewCell {
         deleteButton.setTitleColor(.black, for: .normal)
         deleteButton.layer.cornerRadius = 15
     }
-    
+
     /// 스택뷰 설정
     private func setupStackView() {
         horizontalStackView.axis = .horizontal
         horizontalStackView.spacing = 10
         horizontalStackView.alignment = .center
         horizontalStackView.distribution = .fill
-        
+
         verticalStackView.axis = .vertical
         verticalStackView.spacing = 10
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .fillEqually
     }
-    
+
     /// 스택뷰 레이아웃 설정
     private func setLayoutStackView() {
         countContainerView.snp.makeConstraints { make in
             make.height.equalTo(30)
             make.width.equalTo(90)
         }
-        
+
         minusButton.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview()
             make.width.equalTo(30)
@@ -397,14 +397,14 @@ class StackTableViewCell: UITableViewCell {
             make.width.equalTo(30)
             make.leading.equalTo(countLabel.snp.trailing)
         }
-        
+
         countLabel.snp.makeConstraints { make in
             make.width.equalTo(30)
             make.height.equalTo(30)
             make.leading.equalTo(minusButton.snp.trailing)
             make.trailing.equalTo(plusButton.snp.leading)
         }
-        
+
         horizontalStackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(5)
             make.leading.equalToSuperview().inset(5)
@@ -444,7 +444,7 @@ class StackTableViewCell: UITableViewCell {
         
         [nameLabel, priceLabel].forEach() { verticalStackView.addArrangedSubview($0) }
         [verticalStackView, countContainerView, deleteButton].forEach { horizontalStackView.addArrangedSubview($0) }
-        
+
         contentView.addSubview(horizontalStackView)
         setLayoutStackView()
         
