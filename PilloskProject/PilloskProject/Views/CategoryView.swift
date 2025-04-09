@@ -80,10 +80,6 @@ class CategoryView: UIView {
         categorySelected?(selectedCategory.products)
     }
 
-//    private func returnProducts(buttonTitle: UIButton) -> [Product] {
-//
-//    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -100,7 +96,6 @@ class CategoryView: UIView {
     let categoryItems: [String] = []
     let categoryScrollView = UIScrollView()
     let categoryContentsStackView = UIStackView()
-
 
     private func configureUI() {
 

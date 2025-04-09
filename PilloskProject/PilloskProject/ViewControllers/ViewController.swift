@@ -70,9 +70,6 @@ final class ViewController: UIViewController {
             }
         }
     }
-    
-    func configureUI() {
-        view.addSubview(categoryView)
     // CategoryView 클로저 함수
     private func setCollectionViewProducts() {
         categoryView.categorySelected = { [weak self] products in
@@ -94,10 +91,10 @@ final class ViewController: UIViewController {
         orderSummaryVC.view.frame = view.bounds
         orderSummaryVC.didMove(toParent: self)
 
+    func configureUI() {
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(120)
-
         }
         
         view.addSubview(orderSummaryView)
