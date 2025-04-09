@@ -88,7 +88,7 @@ final class ViewController: UIViewController {
         view.addSubview(menuListView)
         
         menuListView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.top.equalTo(categoryView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(400)
         }
