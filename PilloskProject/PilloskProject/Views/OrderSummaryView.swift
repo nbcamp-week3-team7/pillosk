@@ -10,20 +10,23 @@ import SnapKit
 
 /// 주문 요약 화면 클래스
 /// 테이블뷰, 버튼, 레이블 등 UI 요소를 포함하며 오토레이아웃을 설정
-class OrderSummaryView: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate {
+    weak var delegate: CategoryViewDelegate?
+    
     let orderTableView = UITableView()
     let summaryCountLabel = UILabel()
-    
     let resetButton = UIButton()
     let paymentButton = UIButton()
     
-    /// 뷰가 로드된 후 호출되는 메서드
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        setupUI()
+    }
+    
     /// UI 초기 설정 및 레이아웃 배치 함수 호출
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        [orderTableView, summaryCountLabel, resetButton, paymentButton].forEach { view.addSubview($0) }
+    private func setupUI() {
+        [orderTableView, summaryCountLabel, resetButton, paymentButton].forEach { self.addSubview($0) }
         
         setTableView()
         summaryCountLabelSetting()
@@ -34,7 +37,6 @@ class OrderSummaryView: UIViewController, UITableViewDataSource, UITableViewDele
     /// 테이블뷰 초기 설정
     /// 데이터소스, 델리게이트 설정 및 레이아웃 배치
     func setTableView() {
-        orderTableView.frame = view.bounds
         orderTableView.dataSource = self
         orderTableView.delegate = self
         orderTableView.register(StackTableViewCell.self, forCellReuseIdentifier: "stackCell")
@@ -82,47 +84,47 @@ class OrderSummaryView: UIViewController, UITableViewDataSource, UITableViewDele
     
     /// 초기화 버튼 설정
     /// 텍스트, 폰트, 배경색 및 코너 라운드 적용
-    @objc func resetOrderButton() {
-        resetButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
-            make.width.equalTo(150)
-            make.leading.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-5)
-        }
-        
-        view.layoutIfNeeded()
-        
+    func resetOrderButton() {
         resetButton.setTitle("처음으로", for: .normal)
         resetButton.setTitleColor(.black, for: .normal)
         resetButton.backgroundColor = .white
         resetButton.titleLabel?.textAlignment = .center
         resetButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        
-        resetButton.applyRoundedCorners(corners: [.topLeft, .topRight],
-                                        radius: CGSize(width: 10, height: 10))
+
+        resetButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.width.equalTo(150)
+            make.leading.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-10)
+        }
     }
 
     /// 결제 버튼 설정
     /// 텍스트, 폰트, 배경색 및 코너 라운드 적용
-    @objc func processPayment() {
+    func processPayment() {
+        paymentButton.setTitle("n원 결제하기", for: .normal) // 수정 필요: 데이터 처리
+        paymentButton.setTitleColor(.white, for: .normal)
+        paymentButton.backgroundColor = .systemBlue
+        paymentButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+
         paymentButton.snp.makeConstraints { make in
             make.height.equalTo(50)
             make.leading.equalTo(resetButton.snp.trailing)
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-5)
+            make.bottom.equalToSuperview().offset(-10)
         }
-        
-        view.layoutIfNeeded()
-        
-        paymentButton.setTitle("n원 결제하기", for: .normal) // 수정 필요: 데이터 처리
-        paymentButton.setTitleColor(.white, for: .normal)
-        paymentButton.backgroundColor = .systemBlue
-        paymentButton.contentHorizontalAlignment = .center
-        paymentButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        
-        paymentButton.applyRoundedCorners(corners: [.topLeft, .topRight],
-                                          radius: CGSize(width: 10, height: 10))
     }
+    
+    /// 코너 라운드 적용
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            resetButton.applyRoundedCorners(corners: [.topLeft, .topRight], radius: CGSize(width: 10, height: 10))
+            paymentButton.applyRoundedCorners(corners: [.topLeft, .topRight], radius: CGSize(width: 10, height: 10))
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
 }
 
 /// UIView 확장
@@ -269,7 +271,7 @@ class StackTableViewCell: UITableViewCell {
         countContainerViewSettings()
         
         setupStackView()
-    
+        
         [nameLabel, priceLabel].forEach() { verticalStackView.addArrangedSubview($0) }
         [verticalStackView, countContainerView, deleteButton].forEach { horizontalStackView.addArrangedSubview($0) }
         
@@ -278,8 +280,7 @@ class StackTableViewCell: UITableViewCell {
         setLayoutStackView()
     }
     
-    /// 셀 초기화 실패 시 호출
     required init?(coder: NSCoder) {
-        fatalError("init(coder): has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
 }
