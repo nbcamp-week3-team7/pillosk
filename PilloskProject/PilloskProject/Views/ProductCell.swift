@@ -100,7 +100,7 @@ final class ProductCell: UICollectionViewCell {
 
         contentView.layer.cornerRadius = 8
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.layer.borderColor = UIColor.systemGray4.cgColor
         contentView.clipsToBounds = true
 
         imageView.snp.makeConstraints {

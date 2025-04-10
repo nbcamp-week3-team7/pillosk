@@ -54,7 +54,7 @@ final class ViewController: UIViewController {
                 switch result {
                 case .success(let productData):
                     self.productData = [productData]
-
+                    
                     let categoryNames = productData.categories.map { $0 }
                     self.categoryView.notifyCategoryButtonsUpdate(categories: categoryNames)
                     // 앱실행시 첫번째 선택 결과를 받겠다고 클로저 호출 및 동작
@@ -91,11 +91,10 @@ final class ViewController: UIViewController {
         }
 
         view.addSubview(menuListView)
-        // MARK: - -오토 레이아웃 우측이 안맞아서 trailing 수정 했습니다.
+        
         menuListView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().inset(16)
-            $0.trailing.equalToSuperview().inset(-16)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(400)
         }
 
@@ -113,30 +112,13 @@ final class ViewController: UIViewController {
         // ProductCell 셀 등록 (재사용을 위한 identifier 설정)
         menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
     }
-
-    /// 상품 목록 더미 데이터 로드
-    private func loadDummyData() {
-        // 임시데이터, 추후 수정
-        products = [
-            Product(name: "비타민C 1000mg", price: 3900, image: "CoughMedicine.jpg"),
-            Product(name: "종합감기약", price: 7500, image: "Antipyretic.jpg"),
-            Product(name: "에너지 드링크", price: 2500, image: "NasalSpray.jpg"),
-            Product(name: "피로 회복제", price: 4800, image: "Painkiller.jpg"),
-            Product(name: "소화제", price: 3300, image: "VitaminC.jpg"),
-            Product(name: "유산균", price: 8500, image: "Acetaminophen.jpg")
-        ]
-
-        // 페이지 컨트롤의 전체 페이지 수 업데이트
-        menuListView.pageControl.numberOfPages = numberOfPages
-        // 컬렉션 뷰 데이터 리로드 (화면 갱신)
-        menuListView.collectionView.reloadData()
-    }
 }
 
 extension ViewController: UICollectionViewDataSource {
     /// 컬렉션 뷰에 표시할 아이템(셀)의 총 개수 반환
-    /// - Parameter collectionView: 현재 컬렉션 뷰
-    /// - Parameter section: 섹션 번호 (현재는 1개)
+    /// - Parameters:
+    ///   - collectionView: 현재 컬렉션 뷰
+    ///   - section: 섹션 번호 (현재는 1개)
     /// - Returns: 상품 데이터의 총 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
