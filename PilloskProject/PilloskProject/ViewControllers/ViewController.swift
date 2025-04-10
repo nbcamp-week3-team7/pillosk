@@ -75,12 +75,12 @@ final class ViewController: UIViewController {
         categoryView.categorySelected = { [weak self] products in
             guard let self = self else { return }
             self.products = products
-            
+
             self.menuListView.pageControl.numberOfPages = Int(
                 ceil(Double(products.count) / Double(self.itemsPerPage))
             )
             self.menuListView.collectionView.reloadData()
-            
+
             let firstIndexPath = IndexPath(item: 0, section: 0)
             self.menuListView.collectionView.scrollToItem(at: firstIndexPath, at: .left, animated: false)
         }
