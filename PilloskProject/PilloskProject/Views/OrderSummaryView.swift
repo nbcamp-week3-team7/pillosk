@@ -12,9 +12,8 @@ import SnapKit
 /// 주문 요약 화면 클래스
 /// 테이블뷰, 버튼, 레이블 등 UI 요소를 포함하며 오토레이아웃을 설정
 final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate, StackTableViewCellDelegate {
-
-    private var orderItems: [MenuItem] = []
-
+    
+    private let orderData = OrderSummaryData() //데이터 관리 객체
     let orderTableView = UITableView()
     let summaryCountLabel = UILabel()
     let resetButton = UIButton()
@@ -79,23 +78,18 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     /// - 같은 이름의 상품이 있으면 수량만 증가, 없으면 새로 추가
     /// - UI 업데이트: 테이블뷰 갱신, 레이블 및 버튼 상태 변경
     func addOrderItem(product: Product) {
-        if let existingIndex = orderItems.firstIndex(where: { $0.name == product.name }) {
-            orderItems[existingIndex].quantity += 1
-        } else {
-            let menuItem = MenuItem(name: product.name, price: product.price, quantity: 1)
-            orderItems.append(menuItem)
-        }
-
+        orderData.addOrderItem(product: product)
+        
         /// 테이블뷰 갱신 및 UI 업데이트
         orderTableView.reloadData()
         updateSummaryCountLabel()
-        updateButtons(isEnabled: !orderItems.isEmpty)
+        updateButtons(isEnabled: orderData.getOrderItemCount() > 0)
         updatePaymentButtonTitle()
     }
 
     /// 테이블뷰의 섹션별 셀 개수 반환
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderItems.count
+        return orderData.getOrderItemCount()
     }
 
     /// 테이블뷰 셀 높이 설정
@@ -107,7 +101,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
 
-        let menuItem = orderItems[indexPath.row]
+        let menuItem = orderData.getOrderItems()[indexPath.row]
         cell.configure(name: menuItem.name,
                        price: menuItem.price,
                        quantity: menuItem.quantity)
@@ -120,10 +114,10 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     func didTapDeleteButton(cell: StackTableViewCell) {
         guard let indexPath = orderTableView.indexPath(for: cell) else { return }
 
-        orderItems.remove(at: indexPath.row)
+        orderData.removeOrderItem(at: indexPath.row)
         orderTableView.deleteRows(at: [indexPath], with: .automatic)
         updateSummaryCountLabel()
-        updateButtons(isEnabled: !orderItems.isEmpty)
+        updateButtons(isEnabled: orderData.getOrderItemCount() > 0)
         updatePaymentButtonTitle()
     }
 
@@ -131,25 +125,23 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     /// - 특정 셀의 수량 변경 후 UI 업데이트
     func didUpdateQuantity(cell: StackTableViewCell, quantity: Int) {
         guard let indexPath = orderTableView.indexPath(for: cell) else { return }
-
-        if indexPath.row < orderItems.count {
+        
+        /// orderData를 통해 수량 업데이트
             if quantity <= 0 {
                 print("1개 이하 구매 불가")
                 return
             }
 
-            orderItems[indexPath.row].quantity = quantity
-            updatePaymentButtonTitle()
-            updateSummaryCountLabel()
-        } else {
-            print("IndexPath.row가 배열 범위 초과")
-        }
+        orderData.updateOrderItemQuantity(at: indexPath.row, quantity: quantity)
+        orderTableView.reloadRows(at: [indexPath], with: .automatic) // 셀만 갱신
+        updatePaymentButtonTitle()
+        updateSummaryCountLabel()
     }
 
     /// 총 가격 계산
     /// - 주문 목록의 가격과 수량을 곱하여 총합 계산
     private func calculateTotalPrice() -> Int {
-        return orderItems.reduce(0) { $0 + ($1.price * $1.quantity) }
+        return orderData.calculateTotalPrice()
     }
 
     /// 요약 레이블 초기 설정
@@ -168,7 +160,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
 
     /// 총 수량 레이블 업데이트
     func updateSummaryCountLabel() {
-        let totalQuantity = orderItems.reduce(0) { $0 + $1.quantity }
+        let totalQuantity = orderData.getOrderItems().reduce(0) { $0 + $1.quantity }
         summaryCountLabel.text = " 총 \(totalQuantity)개"
     }
 
@@ -239,7 +231,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
 
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.orderItems.removeAll()
+            self.orderData.clearOrderItems()
             self.orderTableView.reloadData()
             self.updateSummaryCountLabel()
             self.updateButtons(isEnabled: false)
