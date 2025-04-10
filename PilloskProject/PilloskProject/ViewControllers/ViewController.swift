@@ -91,11 +91,10 @@ final class ViewController: UIViewController {
         }
 
         view.addSubview(menuListView)
-        // MARK: - -오토 레이아웃 우측이 안맞아서 trailing 수정 했습니다.
+        
         menuListView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().inset(16)
-            $0.trailing.equalToSuperview().inset(-16)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(400)
         }
 
