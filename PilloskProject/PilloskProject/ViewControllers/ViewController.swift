@@ -54,7 +54,7 @@ final class ViewController: UIViewController {
                 switch result {
                 case .success(let productData):
                     self.productData = [productData]
-                    
+
                     let categoryNames = productData.categories.map { $0 }
                     self.categoryView.notifyCategoryButtonsUpdate(categories: categoryNames)
                     // 앱실행시 첫번째 선택 결과를 받겠다고 클로저 호출 및 동작
@@ -91,7 +91,7 @@ final class ViewController: UIViewController {
         }
 
         view.addSubview(menuListView)
-        
+
         menuListView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(16)

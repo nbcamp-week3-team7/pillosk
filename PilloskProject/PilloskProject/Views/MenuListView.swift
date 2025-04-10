@@ -14,7 +14,7 @@ import SnapKit
 final class MenuListView: UIView {
     /// 상품 리스트를 표시할 컬렉션 뷰
     let collectionView: UICollectionView
-    
+
     /// 현재 페이지를 나타내는 페이지 컨트롤
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
@@ -46,7 +46,7 @@ final class MenuListView: UIView {
                 subitems: [item, item]
             )
             horizontalGroup.interItemSpacing = .fixed(16)
-            
+
             horizontalGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
             // 수직 그룹: 수평 그룹 2개를 세로로 배치
             let verticalGroupSize = NSCollectionLayoutSize(
@@ -73,7 +73,7 @@ final class MenuListView: UIView {
 
             return section
         }
-        
+
         // 컬렉션 뷰 초기화
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isPagingEnabled = false

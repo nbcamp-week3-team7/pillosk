@@ -26,8 +26,7 @@ class CategoryView: UIView {
             var configuration = UIButton.Configuration.filled()
             configuration.title = items.name
             configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-            configuration.baseForegroundColor = .white
-            // configuration.background.strokeColor = .cyan
+
             configuration.cornerStyle = .capsule
             configuration.buttonSize = .medium
             configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -38,9 +37,13 @@ class CategoryView: UIView {
                 var config = button.configuration
                 switch button.state {
                 case .selected:
-                    config?.baseBackgroundColor = .darkGray
-                default:
+                    config?.baseForegroundColor = .white
                     config?.baseBackgroundColor = UIColor(hex: "1B8DFF")
+                    config?.background.strokeColor = nil
+                default:
+                    config?.baseForegroundColor = .black
+                    config?.baseBackgroundColor = .white
+                    config?.background.strokeColor = UIColor(hex: "DFDFDF")
                 }
                 button.configuration = config
             }
@@ -59,7 +62,7 @@ class CategoryView: UIView {
         configureCategoryButtons(categories: categories)
 
     }
-    // 첫번째
+    // 첫번째 카테고리 강제선택
     func selectedFirstCategory(name: String) {
         guard let button = buttons.first(where: { $0.configuration?.title == name }) else { return }
         buttonTapped(button)
@@ -107,9 +110,6 @@ class CategoryView: UIView {
         categoryViewTitleLabel.textColor = UIColor(hex: "1B8DFF")
 
         categoryScrollView.showsHorizontalScrollIndicator = false
-
-//        categoryScrollView.backgroundColor = .red
-//        categoryContentsStackView.backgroundColor = .blue
 
         categoryContentsStackView.axis = .horizontal
         categoryContentsStackView.spacing = 10
