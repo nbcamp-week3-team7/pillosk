@@ -37,6 +37,42 @@ Pillosk는 사용자가 카테고리별로 의약품을 선택하고, 구매할 
 
 ---
 
+## **📂 파일 구조**
+
+```
+PilloskProject
+├── Extensions
+│   └── UIView+Extensions.swift  // UIView 관련 확장 기능 구현
+├── Models
+│   ├── Data.swift               // 데이터 모델 정의
+│   ├── DataService.swift        // 데이터 관리 서비스
+│   └── OrderSummaryData.swift   // 주문 요약 데이터 모델
+├── Resources
+│   ├── Assets.xcassets          // 이미지 및 앱 리소스 파일
+│   ├── data.json                // 의약품 데이터 저장
+│   └── Info.plist               // 앱 설정 파일
+├── Utils
+│   └── Constants.swift          // 앱에서 사용하는 상수 정의
+├── ViewControllers
+│   └── ViewController.swift     // 메인 뷰 컨트롤러
+├── Views
+│   ├── CategoryView.swift       // 카테고리별 UI 구현
+│   ├── MenuListView.swift       // 상품 목록 UI 구현
+│   ├── OrderSummaryTableView... // 주문 요약 테이블 뷰
+│   ├── OrderSummaryView.swift   // 주문 요약 UI
+│   └── ProductCell.swift        // 상품 셀 UI
+├── AppDelegate.swift            // 앱 델리게이트 파일
+├── SceneDelegate.swift          // 씬 델리게이트 파일
+├── LaunchScreen.storyboard      // 런치 화면
+└── Package Dependencies
+    └── SnapKit 5.7.1            // 레이아웃 구성 라이브러리
+
+```
+
+---
+
+## **✨ UI 특징**
+
 ## **✨ UI 특징**
 1. **카테고리별 상품 나열**  
    - 상단 탭을 통해 감기/피로, 두통/통증, 소화/위장 등 카테고리를 선택 가능.  
