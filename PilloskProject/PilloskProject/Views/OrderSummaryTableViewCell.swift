@@ -11,6 +11,7 @@ import SnapKit
 class StackTableViewCell: UITableViewCell {
     weak var delegate: StackTableViewCellDelegate?
 
+
     let countContainerView = UIView()
     let verticalStackView = UIStackView()
     let horizontalStackView = UIStackView()
@@ -181,8 +182,7 @@ class StackTableViewCell: UITableViewCell {
     /// 상품 수량 감소 및 UI 업데이트
     @objc private func minusButtonTapped() {
         guard let currentCount = Int(countLabel.text ?? "0"), currentCount > 1 else {
-            print("1개 이하 구매 불가")
-            return
+            return //1개 이하 구매 불가
         }
         let updatedCount = currentCount - 1
         countLabel.text = "\(updatedCount)"
@@ -214,11 +214,9 @@ class StackTableViewCell: UITableViewCell {
         let updatedCount = increment ? currentCount + 1 : currentCount - 1
 
         if updatedCount < 0 {
-            print("0 이하 조작 불가")
-            return
+            return //0이하 조작 불가
         } else if updatedCount > 100 {
-            print("100 이상 조작 불가")
-            return
+            return //100이상 조작 불가
         }
         countLabel.text = "\(updatedCount)"
     }
