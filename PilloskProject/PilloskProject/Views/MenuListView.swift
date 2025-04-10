@@ -47,7 +47,7 @@ final class MenuListView: UIView {
             )
             horizontalGroup.interItemSpacing = .fixed(16)
             
-            horizontalGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+            horizontalGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
             // 수직 그룹: 수평 그룹 2개를 세로로 배치
             let verticalGroupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
