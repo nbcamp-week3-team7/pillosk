@@ -128,8 +128,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
         
         /// orderData를 통해 수량 업데이트
             if quantity <= 0 {
-                print("1개 이하 구매 불가")
-                return
+                return //음수 결제 불가
             }
 
         orderData.updateOrderItemQuantity(at: indexPath.row, quantity: quantity)
@@ -237,7 +236,6 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
             self.updateButtons(isEnabled: false)
             self.updatePaymentButtonTitle()
             if !isReset {
-                print("결제 진행 중")
                 /// 추후 추가 결제 로직 기능 작성 가능
             }
         }
