@@ -125,7 +125,7 @@ final class ProductCell: UICollectionViewCell {
     func configure(with product: Product) {
         self.product = product
         nameLabel.text = product.name
-        priceLabel.text = "\(product.price)원"
+        priceLabel.text = "\(product.price.formattedWithComma())원"
         imageView.image = UIImage(named: product.image)
     }
 }
