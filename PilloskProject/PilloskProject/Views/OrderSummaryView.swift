@@ -40,7 +40,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     
     /// 구분선 설정
     func setLineView() {
-        lineView.backgroundColor = .lightGray
+        lineView.backgroundColor = .systemGray4
         self.addSubview(lineView)
         
         lineView.snp.makeConstraints { make in
