@@ -27,6 +27,7 @@ class CategoryView: UIView {
             configuration.title = items.name
             configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
             configuration.baseForegroundColor = .white
+            // configuration.background.strokeColor = .cyan
             configuration.cornerStyle = .capsule
             configuration.buttonSize = .medium
             configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -107,6 +108,9 @@ class CategoryView: UIView {
 
         categoryScrollView.showsHorizontalScrollIndicator = false
 
+//        categoryScrollView.backgroundColor = .red
+//        categoryContentsStackView.backgroundColor = .blue
+
         categoryContentsStackView.axis = .horizontal
         categoryContentsStackView.spacing = 10
         categoryContentsStackView.alignment = .center
@@ -130,9 +134,9 @@ class CategoryView: UIView {
 
         categoryContentsStackView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20) // ✅ 왼쪽 여백 20pt
+            $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview()
-            $0.height.equalToSuperview() // 스크롤뷰랑 높이 동일하게 유지
+            $0.height.equalToSuperview()
         }
 
     }

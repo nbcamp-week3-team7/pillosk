@@ -13,7 +13,7 @@ import SnapKit
 final class ProductCell: UICollectionViewCell {
     /// BY: 델리게이트 연결
     weak var delegate: ProductCellDelegate?
-    
+
     /// 상품 이미지 뷰
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -68,16 +68,16 @@ final class ProductCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside) //BY: Delegate Button Action
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside) // BY: Delegate Button Action
     }
-    
+
     /// BY: 버튼 누르면 델리게이트 동작
     @objc private func addButtonTapped() {
             if let product = product {
                 delegate?.didTapAddButton(product: product)
             }
         }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

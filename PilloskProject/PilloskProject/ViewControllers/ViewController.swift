@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Combine
 
 extension ViewController: ProductCellDelegate {
     func didTapAddButton(product: Product) {
@@ -40,13 +39,13 @@ final class ViewController: UIViewController {
         loadData()
         configureUI()
         setupCollectionView()
-        loadDummyData()
     }
 
     private func setCollectionView() {
         menuListView.collectionView.dataSource = self
         menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
     }
+
     func loadData() {
         dataService.loadData { [weak self] result in
             guard let self = self else { return }
@@ -60,7 +59,7 @@ final class ViewController: UIViewController {
                     self.categoryView.notifyCategoryButtonsUpdate(categories: categoryNames)
                     // 앱실행시 첫번째 선택 결과를 받겠다고 클로저 호출 및 동작
                     self.setCollectionViewProducts()
-                    //강제로 버튼을 눌러서 menulist 보여줌
+                    // 강제로 버튼을 눌러서 menulist 보여줌
                     if let firstCategorySet = categoryNames.first {
                         self.categoryView.selectedFirstCategory(name: firstCategorySet.name)
                     }
@@ -70,11 +69,12 @@ final class ViewController: UIViewController {
             }
         }
     }
+
     // CategoryView 클로저 함수
     private func setCollectionViewProducts() {
         categoryView.categorySelected = { [weak self] products in
             guard let self = self else { return }
-            print(products)
+            print(#fileID, #function, #line, "print product = \(products)")
             self.products = products
             self.menuListView.pageControl.numberOfPages = Int(
                 ceil(Double(products.count) / Double(self.itemsPerPage))
@@ -83,33 +83,14 @@ final class ViewController: UIViewController {
         }
     }
     // 메인 view 오토레이아웃 함수
-    private func configureUI() {
-        addChild(orderSummaryVC)
-        [categoryView, menuListView, orderSummaryVC.view]
-            .forEach { view.addSubview( $0 )}
-
-        orderSummaryVC.view.frame = view.bounds
-        orderSummaryVC.didMove(toParent: self)
-
     func configureUI() {
+        view.addSubview(categoryView)
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(120)
         }
-        
-        view.addSubview(orderSummaryView)
-        orderSummaryView.snp.makeConstraints { make in
-            make.height.equalTo(300)
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(10)
-        }
 
-    }
-    
-    /// 메인 뷰에 menuListView 추가 및 레이아웃 설정
-    private func setupViews() {
         view.addSubview(menuListView)
-        
         // MARK: - -오토 레이아웃 우측이 안맞아서 trailing 수정 했습니다.
         menuListView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom).offset(20)
@@ -118,33 +99,19 @@ final class ViewController: UIViewController {
             $0.height.equalTo(400)
         }
 
-        orderSummaryVC.view.snp.makeConstraints { make in
+        view.addSubview(orderSummaryView)
+        orderSummaryView.snp.makeConstraints { make in
             make.height.equalTo(300)
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
         }
-    }
 
-    // combine 메서드
-    private func observingCategoryChanges() {
-        categoryView.$selectedProducts
-            .receive(on: RunLoop.main)
-            .sink { [weak self] productsName in
-                self?.products = productsName
-                self?.menuListView.collectionView.reloadData()
-            }
-            .store(in: &cancellables)
     }
-
     /// 컬렉션 뷰의 데이터 소스 연결 및 셀 등록
     private func setupCollectionView() {
         menuListView.collectionView.dataSource = self
         // ProductCell 셀 등록 (재사용을 위한 identifier 설정)
         menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
-    }
-
-    func addOrderSummaryViewController() {
-
     }
 
     /// 상품 목록 더미 데이터 로드
