@@ -30,8 +30,10 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     /// UI 초기 설정 및 레이아웃 배치 함수 호출
     private func setupUI() {
         orderTableView.showsVerticalScrollIndicator = false // 세로 스크롤 숨기기
-        [orderTableView, summaryCountLabel, resetButton, paymentButton, lineView].forEach { self.addSubview($0) }
-
+        
+        let subviews = [orderTableView, summaryCountLabel, resetButton, paymentButton, lineView]
+            subviews.forEach { addSubview($0) }
+        
         setLineView()
         setTableView()
         summaryCountLabelSetting()
@@ -147,9 +149,6 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     /// 총 가격 계산
     /// - 주문 목록의 가격과 수량을 곱하여 총합 계산
     private func calculateTotalPrice() -> Int {
-        if orderItems.isEmpty {
-            return 0
-        }
         return orderItems.reduce(0) { $0 + ($1.price * $1.quantity) }
     }
 
@@ -177,11 +176,10 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     /// - 주문 항목이 없으면 버튼 비활성화
     func updateButtons(isEnabled: Bool) {
         let buttonColor: UIColor = isEnabled ? .systemBlue : .lightGray
-        let buttonTextColor: UIColor = isEnabled ? .white : .white
         resetButton.isEnabled = isEnabled
         paymentButton.isEnabled = isEnabled
         paymentButton.backgroundColor = buttonColor
-        paymentButton.setTitleColor(buttonTextColor, for: .normal)
+        paymentButton.setTitleColor(.white, for: .normal)
     }
 
     /// 초기화 버튼 설정
@@ -239,7 +237,8 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     private func showAlert(title: String, message: String, isReset: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self = self else { return }
             self.orderItems.removeAll()
             self.orderTableView.reloadData()
             self.updateSummaryCountLabel()
