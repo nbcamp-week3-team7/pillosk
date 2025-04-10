@@ -64,22 +64,20 @@ class CategoryView: UIView {
     }
     // 첫번째 카테고리 강제선택
     func selectedFirstCategory(name: String) {
-        guard let button = buttons.first(where: { $0.configuration?.title == name }) else { return }
+        guard let button = buttons.first(where: { $0.configuration?.title == name }) else { return  }
         buttonTapped(button)
     }
 
     @objc private func buttonTapped(_ sender: UIButton) {
         // 버튼 상태 확인
-        for button in buttons {
-            button.isSelected = (button == sender)
-        }
+        buttons.forEach { $0.isSelected = ($0 == sender )}
+
         guard let selectedButton = sender.configuration else {
-            print("occured error")
-            return
+            fatalError("버튼을 찾지 못했습니다.")
         }
         guard let title = selectedButton.title,
               let selectedCategory = categories.first(where: { $0.name == title }) else {
-            return
+            fatalError("카테고리를 찾지 못했습니다")
         }
         categorySelected?(selectedCategory.products)
     }
@@ -135,8 +133,9 @@ class CategoryView: UIView {
         categoryContentsStackView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalToSuperview()
+
         }
 
     }
