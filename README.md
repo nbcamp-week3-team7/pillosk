@@ -134,10 +134,10 @@ Pillosk는 사용자가 카테고리별로 의약품을 선택하고, 구매할 
   </tr>
   <tr>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/8443b2f6-871b-4c0f-b5d0-6d3a724a50ed/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.42.37.png?table=block&id=1d16b554-2f29-8001-8746-cb10dced03dc&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=Smp22eJZuBcnkOhnnysNWmsx1PSZBkFDULbyRvV91Pc&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.42.37.png" alt="기본 메인 화면" width="300"/>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/e82d70af-597b-4a5a-8acc-c23302e0358f/image.png?table=block&id=1d16b554-2f29-80a6-8d7d-ecde64001cbb&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=ZENIAr4dpDVn6sdRNZPNA1PhlW47i5qJI-_b33FrisU&downloadName=image.png" alt="기본 메인 화면" width="300"/>
     </td>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/6a65faa5-822f-4d51-a05b-b79c41689d9b/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.01.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=5v5U3V3F2g8Xj7Y2dD9K5qzVw7QFZ9f1PZzK7gJQ8bE&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.01.png" alt="메뉴 변경 화면" width="300"/>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/6ac90374-3329-47e9-becf-55fe92d5f152/image.png?table=block&id=1d16b554-2f29-8059-8335-c8d27754cc7b&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=JRfOAcfDkirWPEmQWqc0gQfSfkTTx4IAm6bW8_CazPo&downloadName=image.png" alt="메뉴 변경 화면" width="300"/>
     </td>
   </tr>
   <tr>
@@ -146,10 +146,10 @@ Pillosk는 사용자가 카테고리별로 의약품을 선택하고, 구매할 
   </tr>
   <tr>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/2b02c7c4-3c2b-4d6c-b4e3-03c7c2b5d4c4/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.25.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=5v5U3V3F2g8Xj7Y2dD9K5qzVw7QFZ9f1PZzK7gJQ8bE&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.25.png" alt="장바구니 화면" width="300"/>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/0c7cf66a-4d43-4ef2-8cdc-a227da275c8f/image.png?table=block&id=1d16b554-2f29-802d-bfa7-d3e1b76110c8&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=9U9hqboe316y3wpKe-CrMWULsBRXMKFf5R-aey6xDXQ&downloadName=image.png" alt="장바구니 화면" width="300"/>
     </td>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/3a7b7c7b-3b3b-4b4b-b3b3-3b3b3b3b3b3b/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.50.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=5v5U3V3F2g8Xj7Y2dD9K5qzVw7QFZ9f1PZzK7gJQ8bE&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.50.png" alt="결제 화면" width="300"/>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/c38873fa-aa4e-4c1a-9fcb-7460f7798ec9/image.png?table=block&id=1d16b554-2f29-80a4-8fb6-c0e6b7a8584f&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=z3qlrJS6Ct1KOE44MVdbuUO-YvBIjiUzhWJ3Ori1ijg&downloadName=image.png" alt="결제 화면" width="300"/>
     </td>
   </tr>
 </table>
