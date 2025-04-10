@@ -126,17 +126,34 @@ Pillosk는 사용자가 카테고리별로 의약품을 선택하고, 구매할 
 ---
 
 ## **🖼️ 앱 구현 화면**
-### **1. 기본 메인 화면**
-![기본 메인 화면](https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/8443b2f6-871b-4c0f-b5d0-6d3a724a50ed/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.42.37.png?table=block&id=1d16b554-2f29-8001-8746-cb10dced03dc&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=Smp22eJZuBcnkOhnnysNWmsx1PSZBkFDULbyRvV91Pc&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.42.37.png)
 
-### **2. 메뉴 변경 화면**
-![메뉴 변경 화면](https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/6a65faa5-822f-4d51-a05b-b79c41689d9b/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.01.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=hbMdzzFmWm3MIjyDevauWIydaomtgqox4LgJmp7XXVo&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.01.png)
+<table>
+  <tr>
+    <td><strong>기본 메인 화면</strong></td>
+    <td><strong>메뉴 변경 화면</strong></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/8443b2f6-871b-4c0f-b5d0-6d3a724a50ed/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.42.37.png?table=block&id=1d16b554-2f29-8001-8746-cb10dced03dc&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=Smp22eJZuBcnkOhnnysNWmsx1PSZBkFDULbyRvV91Pc&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.42.37.png" alt="기본 메인 화면" width="300"/>
+    </td>
+    <td>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/6a65faa5-822f-4d51-a05b-b79c41689d9b/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.01.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=5v5U3V3F2g8Xj7Y2dD9K5qzVw7QFZ9f1PZzK7gJQ8bE&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.01.png" alt="메뉴 변경 화면" width="300"/>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>장바구니 화면</strong></td>
+    <td><strong>결제 화면</strong></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/2b02c7c4-3c2b-4d6c-b4e3-03c7c2b5d4c4/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.25.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=5v5U3V3F2g8Xj7Y2dD9K5qzVw7QFZ9f1PZzK7gJQ8bE&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.25.png" alt="장바구니 화면" width="300"/>
+    </td>
+    <td>
+      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/3a7b7c7b-3b3b-4b4b-b3b3-3b3b3b3b3b3b/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.50.png?table=block&id=1d16b554-2f29-8055-b557-cc5d1c0820ad&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=5v5U3V3F2g8Xj7Y2dD9K5qzVw7QFZ9f1PZzK7gJQ8bE&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.50.png" alt="결제 화면" width="300"/>
+    </td>
+  </tr>
+</table>
 
-### **3. 장바구니 추가 화면**
-![장바구니 추가 화면](https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/33fa6bcf-ee26-4885-8cb9-b8c858cfff9a/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.24.png?table=block&id=1d16b554-2f29-8030-8d65-c5a4234382bc&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=PQSYVeBy7Ih8KNeuBtR9vuPctgM9pg0h8zAinSk4ESY&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.24.png)
-
-### **4. 결제 Alert창 화면**
-![결제 Alert창 화면](https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/4889f6fb-cc25-45f4-8ce1-3431ebaf33ff/Simulator_Screenshot_-_iPhone_16_Pro_-_2025-04-10_at_18.43.33.png?table=block&id=1d16b554-2f29-80b8-8b64-f596f95746e5&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744300800000&signature=oO4AtlbGHtrIkmXLbalX952KniYNYrfeTWY_Kdgvnhk&downloadName=Simulator+Screenshot+-+iPhone+16+Pro+-+2025-04-10+at+18.43.33.png)
 
 ---
 
