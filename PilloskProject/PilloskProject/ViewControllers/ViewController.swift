@@ -91,13 +91,14 @@ final class ViewController: UIViewController {
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(120)
+            $0.leading.trailing.equalToSuperview().inset(15)
         }
 
         view.addSubview(menuListView)
 
         menuListView.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(15)
             $0.height.equalTo(400)
         }
 
@@ -105,7 +106,7 @@ final class ViewController: UIViewController {
         orderSummaryView.snp.makeConstraints { make in
             make.height.equalTo(300)
             make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(15)
         }
 
     }
