@@ -19,6 +19,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     let resetButton = UIButton()
     let paymentButton = UIButton()
     let lineView = UIView()
+    let emptyLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,10 +31,11 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     private func setupUI() {
         orderTableView.showsVerticalScrollIndicator = false // 세로 스크롤 숨기기
         
-        let subviews = [orderTableView, summaryCountLabel, resetButton, paymentButton, lineView]
+        let subviews = [orderTableView, summaryCountLabel, resetButton, paymentButton, lineView, emptyLabel]
         subviews.forEach { addSubview($0) }
         
         setLineView()
+        setEmptyLabel()
         setTableView()
         summaryCountLabelSetting()
         resetOrderButton()
@@ -50,6 +52,29 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(summaryCountLabel.snp.bottom)
         }
+    }
+    
+    /// 셀이 비었다면 보여지는 emptyLabel 설정
+    func setEmptyLabel() {
+        emptyLabel.text = "상품을 선택해주세요"
+        emptyLabel.textAlignment = .center
+        emptyLabel.textColor = .lightGray
+        emptyLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        emptyLabel.isHidden = false // 기본적으로 출력
+        
+        self.addSubview(emptyLabel)
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.center.equalTo(orderTableView)
+        }
+        
+    }
+    
+    /// 데이터 상태에 따라 라벨 및 테이블뷰 업데이트
+    private func updateEmptyLabelVisibility() {
+        let isEmpty = orderData.getOrderItemCount() == 0
+        emptyLabel.isHidden = !isEmpty
+        orderTableView.isHidden = isEmpty
     }
     
     /// 테이블뷰 초기 설정
@@ -85,6 +110,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
         updateSummaryCountLabel()
         updateButtons(isEnabled: orderData.getOrderItemCount() > 0)
         updatePaymentButtonTitle()
+        updateEmptyLabelVisibility()
     }
     
     /// 테이블뷰의 섹션별 셀 개수 반환
@@ -119,6 +145,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
         updateSummaryCountLabel()
         updateButtons(isEnabled: orderData.getOrderItemCount() > 0)
         updatePaymentButtonTitle()
+        updateEmptyLabelVisibility()
     }
     
     /// 테이블뷰 셀 수량 변경 요청 처리
