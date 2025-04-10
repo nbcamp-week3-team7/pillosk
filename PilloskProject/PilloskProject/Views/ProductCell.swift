@@ -33,14 +33,14 @@ final class ProductCell: UICollectionViewCell {
     /// 상품명
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = Style.productNameFont
         return label
     }()
 
     /// 상품 가격
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = Style.productPriceFont
         return label
     }()
 
@@ -125,7 +125,15 @@ final class ProductCell: UICollectionViewCell {
     func configure(with product: Product) {
         self.product = product
         nameLabel.text = product.name
-        priceLabel.text = "\(product.price)원"
+        priceLabel.text = "\(product.price.formattedWithComma())원"
         imageView.image = UIImage(named: product.image)
+    }
+    
+    /// 셀이 재사용되기 전에 호출되어 셀의 상태를 초기화
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        nameLabel.text = nil
+        priceLabel.text = nil
     }
 }
