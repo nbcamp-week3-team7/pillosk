@@ -8,9 +8,14 @@
 import UIKit
 import SnapKit
 
+extension ViewController: ProductCellDelegate {
+    func didTapAddButton(product: Product) {
+        orderSummaryView.addOrderItem(product: product)
+    }
+}
+
 final class ViewController: UIViewController {
-    let orderSummaryVC = OrderSummaryView()
-    
+    let orderSummaryView = OrderSummaryView()
     let categoryView = CategoryView()
     private let dataService = DataService()
     private var productData: [ProductData] = []
@@ -34,27 +39,15 @@ final class ViewController: UIViewController {
         categoryView.delegate = self
         loadData()
         configureUI()
-        
         setupViews()
         setupCollectionView()
         loadDummyData()
-        
-        addOrderSummaryViewController()
     }
-    
-    func addOrderSummaryViewController() {
-        addChild(orderSummaryVC)
-        view.addSubview(orderSummaryVC.view)
-        orderSummaryVC.view.frame = view.bounds
-        orderSummaryVC.didMove(toParent: self)
-        
-        orderSummaryVC.view.snp.makeConstraints { make in
-            make.height.equalTo(300)
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(10)
-        }
+
+    private func setCollectionView() {
+        menuListView.collectionView.dataSource = self
+        menuListView.collectionView.register(ProductCell.self, forCellWithReuseIdentifier: CellIdentifier.productCell)
     }
-    
     func loadData() {
         dataService.loadData { [weak self] result in
             guard let self = self else { return }
@@ -85,14 +78,19 @@ final class ViewController: UIViewController {
     }
     
     func configureUI() {
-        
-        categoryView.backgroundColor = .brown
-        
         view.addSubview(categoryView)
         categoryView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(120)
         }
+        
+        view.addSubview(orderSummaryView)
+        orderSummaryView.snp.makeConstraints { make in
+            make.height.equalTo(300)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+
     }
     
     /// 메인 뷰에 menuListView 추가 및 레이아웃 설정
@@ -154,6 +152,7 @@ extension ViewController: UICollectionViewDataSource {
         }
         // indexPath 에 해당하는 상품 데이터 가져오기
         let product = products[indexPath.item]
+        cell.delegate = self
         // 셀 구성 (상품명, 가격, 이미지)
         cell.configure(with: product)
         
