@@ -76,7 +76,6 @@ final class MenuListView: UIView {
 
         // 컬렉션 뷰 초기화
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.isPagingEnabled = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
 
