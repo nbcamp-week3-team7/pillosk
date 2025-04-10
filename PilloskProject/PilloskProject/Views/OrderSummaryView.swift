@@ -29,6 +29,7 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
 
     /// UI 초기 설정 및 레이아웃 배치 함수 호출
     private func setupUI() {
+        orderTableView.showsVerticalScrollIndicator = false // 세로 스크롤 숨기기
         [orderTableView, summaryCountLabel, resetButton, paymentButton, lineView].forEach { self.addSubview($0) }
 
         setLineView()
@@ -272,29 +273,6 @@ final class OrderSummaryView: UIView, UITableViewDataSource, UITableViewDelegate
     }
 }
 
-/// UIView 확장
-/// 특정 방향으로 코너를 둥글게 만드는 메서드 제공
-extension UIView {
-    func applyRoundedCorners(corners: UIRectCorner, radius: CGSize) {
-        let path = UIBezierPath(roundedRect: self.bounds,
-                                byRoundingCorners: corners,
-                                cornerRadii: radius)
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-}
-
-/// 숫자를 천 단위로 콤마(,) 추가하여 문자열로 반환
-extension Int {
-    func formattedWithComma() -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.groupingSeparator = ","
-        return numberFormatter.string(from: NSNumber(value: self)) ?? "\(self)"
-    }
-}
-
 /// 테이블뷰 셀 커스텀 클래스
 /// 스택뷰 및 다양한 UI 요소를 포함
 class StackTableViewCell: UITableViewCell {
@@ -510,19 +488,5 @@ class StackTableViewCell: UITableViewCell {
             return
         }
         countLabel.text = "\(updatedCount)"
-    }
-}
-
-/// 부모 뷰 컨트롤러를 가져오는 확장 메서드
-extension UIView {
-    var parentViewController: UIViewController? {
-        var responder: UIResponder? = self
-        while let response = responder {
-            if let viewController = response as? UIViewController {
-                return viewController
-            }
-            responder = response.next
-        }
-        return nil
     }
 }
