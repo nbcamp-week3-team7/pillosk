@@ -30,4 +30,3 @@ struct MenuItem {
     let price: Int
     var quantity: Int
 }
-

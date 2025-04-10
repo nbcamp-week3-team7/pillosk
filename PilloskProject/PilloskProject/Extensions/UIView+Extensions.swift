@@ -23,12 +23,6 @@ extension UIColor {
     }
 }
 
-extension ViewController: CategoryViewDelegate {
-    func setCategoryButtons(categories: [String]) {
-        categoryView.notifyCategoryButtonsUpdate(categories: categories)
-    }
-}
-
 /// 상품 셀에서 발생하는 이벤트를 처리하기 위한 델리게이트 프로토콜
 /// - 상품 추가 버튼이 눌렸을 때 호출
 /// - product: 추가된 상품 정보
