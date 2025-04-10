@@ -33,14 +33,14 @@ final class ProductCell: UICollectionViewCell {
     /// 상품명
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = Style.productNameFont
         return label
     }()
 
     /// 상품 가격
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = Style.productPriceFont
         return label
     }()
 
