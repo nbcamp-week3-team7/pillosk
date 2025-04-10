@@ -74,7 +74,6 @@ final class ViewController: UIViewController {
     private func setCollectionViewProducts() {
         categoryView.categorySelected = { [weak self] products in
             guard let self = self else { return }
-            print(#fileID, #function, #line, "print product = \(products)")
             self.products = products
             self.menuListView.pageControl.numberOfPages = Int(
                 ceil(Double(products.count) / Double(self.itemsPerPage))
