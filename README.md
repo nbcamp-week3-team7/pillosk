@@ -168,10 +168,10 @@ PilloskProject
   </tr>
   <tr>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/e82d70af-597b-4a5a-8acc-c23302e0358f/image.png?table=block&id=1d16b554-2f29-80a6-8d7d-ecde64001cbb&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=ZENIAr4dpDVn6sdRNZPNA1PhlW47i5qJI-_b33FrisU&downloadName=image.png" alt="기본 메인 화면" width="300"/>
+      <img src="https://github.com/user-attachments/assets/0963f18e-2b20-4b82-8749-2138ba2cb8ab" alt="기본 메인 화면" width="300"/>
     </td>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/6ac90374-3329-47e9-becf-55fe92d5f152/image.png?table=block&id=1d16b554-2f29-8059-8335-c8d27754cc7b&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=JRfOAcfDkirWPEmQWqc0gQfSfkTTx4IAm6bW8_CazPo&downloadName=image.png" alt="메뉴 변경 화면" width="300"/>
+      <img src="https://github.com/user-attachments/assets/a24f5d6d-0e12-4cc0-9ba4-a429ef103fcf" alt="메뉴 변경 화면" width="300"/>
     </td>
   </tr>
   <tr>
@@ -180,10 +180,10 @@ PilloskProject
   </tr>
   <tr>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/0c7cf66a-4d43-4ef2-8cdc-a227da275c8f/image.png?table=block&id=1d16b554-2f29-802d-bfa7-d3e1b76110c8&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=9U9hqboe316y3wpKe-CrMWULsBRXMKFf5R-aey6xDXQ&downloadName=image.png" alt="장바구니 화면" width="300"/>
+      <img src="https://github.com/user-attachments/assets/1b26c99c-7a58-45cc-ae1a-836a51b21628" alt="장바구니 화면" width="300"/>
     </td>
     <td>
-      <img src="https://file.notion.so/f/f/e16ac594-b9fc-4917-a7e0-a205f96f6878/c38873fa-aa4e-4c1a-9fcb-7460f7798ec9/image.png?table=block&id=1d16b554-2f29-80a4-8fb6-c0e6b7a8584f&spaceId=e16ac594-b9fc-4917-a7e0-a205f96f6878&expirationTimestamp=1744315200000&signature=z3qlrJS6Ct1KOE44MVdbuUO-YvBIjiUzhWJ3Ori1ijg&downloadName=image.png" alt="결제 화면" width="300"/>
+      <img src="https://github.com/user-attachments/assets/4f2d99b4-52a3-44b2-a02c-a87424d3250d" alt="결제 화면" width="300"/>
     </td>
   </tr>
 </table>
