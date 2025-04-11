@@ -87,7 +87,7 @@ Pillosk는 사용자가 카테고리별로 의약품을 선택하고, 구매할 
 
 | **Pillosk 아키텍처 구조** |
 |:-------------------------:|
-| ![아키텍처 다이어그램](https://github.com/user-attachments/assets/6a398497-0b17-4da8-bc10-d6c24713a2e5) |
+| ![아키텍처 다이어그램](https://github.com/user-attachments/assets/03f97ffe-d599-4f03-ac73-312dd9342fb6) |
 | Pillosk 앱의 아키텍처 구조를 보여주는 다이어그램입니다. 각 구성 요소는 데이터 소스, 카테고리 뷰, 메뉴 리스트 뷰, 주문 요약 뷰로 나뉘어져 있으며, 각각의 역할을 수행합니다. |
 
 ---
