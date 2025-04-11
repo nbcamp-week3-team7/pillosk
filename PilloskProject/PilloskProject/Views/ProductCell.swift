@@ -128,7 +128,7 @@ final class ProductCell: UICollectionViewCell {
         priceLabel.text = "\(product.price.formattedWithComma())원"
         imageView.image = UIImage(named: product.image)
     }
-    
+
     /// 셀이 재사용되기 전에 호출되어 셀의 상태를 초기화
     override func prepareForReuse() {
         super.prepareForReuse()
