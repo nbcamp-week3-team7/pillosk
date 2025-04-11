@@ -126,13 +126,14 @@ class CategoryView: UIView {
         }
         categoryScrollView.snp.makeConstraints {
             $0.top.equalTo(categoryViewTitleLabel.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.bottom.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(10)
             $0.height.equalTo(50)
         }
 
         categoryContentsStackView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(10)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalToSuperview()
 
